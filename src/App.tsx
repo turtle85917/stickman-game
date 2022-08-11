@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import map from "./assets/map";
+import map from "./utils/Map";
 import { direction, getDirection } from "./utils/Utility";
 
 interface mapData { $text: string[], spike?: string[]; ladder?: string[]; dropSpike?: string[]; };
@@ -82,11 +82,11 @@ function App() {
       ctx.fillText(`x${+(mana.toFixed(2))}`, 45, 110);
 
       let heartImg = new Image();
-      heartImg.src = "src/assets/heart.png";
+      heartImg.src = "/assets/heart.png";
       heartImg.onload = () => ctx.drawImage(heartImg, 0, 5, 50, 50);
 
       let mpImg = new Image();
-      mpImg.src = "src/assets/mana.png";
+      mpImg.src = "/assets/mana.png";
       mpImg.onload = () => ctx.drawImage(mpImg, 0, 65, 50, 50);
 
       // finish obeject draw
@@ -101,7 +101,7 @@ function App() {
       if (data) {
         // draw drop-spikes
         let dropSpikeImg = new Image();
-        dropSpikeImg.src = "src/assets/drop-spike.png";
+        dropSpikeImg.src = "/assets/drop-spike.png";
         dropSpikeImg.onload = () => {
           data.dropSpike?.map(($d, $idx) => {
             if (passDropSpike[$idx] === undefined) {
@@ -160,7 +160,7 @@ function App() {
 
         // draw spikes
         let spikeImg = new Image();
-        spikeImg.src = "src/assets/spike.png";
+        spikeImg.src = "/assets/spike.png";
         spikeImg.onload = () => {
           data.spike?.map($d => {
             const $position = $d
@@ -192,7 +192,7 @@ function App() {
 
         // draw ladders
         let ladderImg = new Image();
-        ladderImg.src = "src/assets/ladder.png";
+        ladderImg.src = "/assets/ladder.png";
         ladderImg.onload = () => {
           data.ladder?.map($d => {
             const $position = $d
@@ -206,7 +206,7 @@ function App() {
 
             // draw floor
             let floorImg = new Image();
-            floorImg.src = "src/assets/floor.png";
+            floorImg.src = "/assets/floor.png";
             floorImg.onload = () => {
               const $size = [floorImg.width, floorImg.height];
               ctx.drawImage(floorImg, $position[0], $position[1] - floorImg.height, $size[0] + 160, $size[1]);
@@ -244,7 +244,7 @@ function App() {
 
       // draw player
       let playerImg = new Image();
-      playerImg.src = "src/assets/player.png";
+      playerImg.src = "/assets/player.png";
       
       playerImg.onload = () => {
         setPlayer(playerImg);
