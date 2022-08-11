@@ -279,68 +279,68 @@ function App() {
 
   return (
     <>
-      <div
-        className="game"
-        tabIndex={0}
-        onKeyUp={() => {
-          setDirection("no");
-        }}
-        onClick={() => {
-          if (level === 1 && textLevel === 0) {
-            setTextLevel(textLevel + 1);
-            setAction(true);
-          }
-        }}
-        onKeyDown={(event) => {
-          const direction = getDirection(event.code);
-          setDirection(direction);
-          setDash(event.shiftKey);
-
-          if (direction !== "no") {
-            setAction(true);
-            if (direction === "restart") { // game restart
-              setPosition({ x: 0, y: 850 });
-              setLife(5);
-              setMana(100);
-              setPassDropSpike([]);
-              setTextLevel(level === 1 ? 1 : 0);
-              setAction(true);
-              setDash(false);
-              if (clear) {
-                setLevel(level + 1);
-                setClear(false);
-              }
-            }
-            
-            const dashSpeed: number = dash && mana > 0 ? 3.5 : 0;
-            if (dash && mana > 0) {
-              setMana(mana - 1);
-              if (mana < 0) setMana(0);
-            }
-
-            if (dash && ["left", "right"].includes(direction) && level === 1 && textLevel === 2) setTextLevel(textLevel + 1);
-
-            if (direction === "left") {
-              setPosition({ x: position.x - moveSpeed(life) - dashSpeed, y: position.y });
-              if (position.x < 0) { // wall
-                setPosition({ x: position.x + 1, y: position.y });
-              }
-            }
-            if (direction === "right") {
-              setPosition({ x: position.x + moveSpeed(life) + dashSpeed, y: position.y });
-              if (position.x > ref.current!.width - player!.width) { // wall
-                setPosition({ x: position.x - 1, y: position.y });
-              }
-            }
-
-            if (!clear) {
-              setClear(collides({ x: position.x, y: position.y, width: player!.width / 2, height: player!.height }, { x: ref.current!.width - goal!.width, y: ref.current!.height - goal!.height, width: goal!.width, height: goal!.height }));
+      <div className="game">
+        <canvas
+          ref={ref} width={1000} height={1000}
+          tabIndex={0}
+          onKeyUp={() => {
+            setDirection("no");
+          }}
+          onClick={() => {
+            if (level === 1 && textLevel === 0) {
+              setTextLevel(textLevel + 1);
               setAction(true);
             }
-          }
-        }}
-        >
-        <canvas ref={ref} width={1000} height={1000} />
+          }}
+          onKeyDown={(event) => {
+            const direction = getDirection(event.code);
+            setDirection(direction);
+            setDash(event.shiftKey);
+  
+            if (direction !== "no") {
+              setAction(true);
+              if (direction === "restart") { // game restart
+                setPosition({ x: 0, y: 850 });
+                setLife(5);
+                setMana(100);
+                setPassDropSpike([]);
+                setTextLevel(level === 1 ? 1 : 0);
+                setAction(true);
+                setDash(false);
+                if (clear) {
+                  setLevel(level + 1);
+                  setClear(false);
+                }
+              }
+              
+              const dashSpeed: number = dash && mana > 0 ? 3.5 : 0;
+              if (dash && mana > 0) {
+                setMana(mana - 1);
+                if (mana < 0) setMana(0);
+              }
+  
+              if (dash && ["left", "right"].includes(direction) && level === 1 && textLevel === 2) setTextLevel(textLevel + 1);
+  
+              if (direction === "left") {
+                setPosition({ x: position.x - moveSpeed(life) - dashSpeed, y: position.y });
+                if (position.x < 0) { // wall
+                  setPosition({ x: position.x + 1, y: position.y });
+                }
+              }
+              if (direction === "right") {
+                setPosition({ x: position.x + moveSpeed(life) + dashSpeed, y: position.y });
+                if (position.x > ref.current!.width - player!.width) { // wall
+                  setPosition({ x: position.x - 1, y: position.y });
+                }
+              }
+  
+              if (!clear) {
+                setClear(collides({ x: position.x, y: position.y, width: player!.width / 2, height: player!.height }, { x: ref.current!.width - goal!.width, y: ref.current!.height - goal!.height, width: goal!.width, height: goal!.height }));
+                setAction(true);
+              }
+            }
+          }}
+          />
       </div>
     </>
   );
