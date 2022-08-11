@@ -40,7 +40,7 @@ function App() {
   const [life, setLife] = useState<number>(5); // player spent life
   const [textLevel, setTextLevel] = useState<number>(0); // text level
 
-  const [moving, setAction] = useState<boolean>(true); // player action?
+  const [moving, setAction] = useState<boolean>(false); // player action?
 
   const [mana, setMana] = useState<number>(100); // player spent mana
   const [dash, setDash] = useState<boolean>(false); // player dash?
