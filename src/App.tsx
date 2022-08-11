@@ -281,7 +281,7 @@ function App() {
     <>
       <div
         className="game"
-        tabIndex={1}
+        tabIndex={0}
         onKeyUp={() => {
           setDirection("no");
         }}
