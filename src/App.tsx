@@ -91,7 +91,7 @@ function App() {
 
       // finish obeject draw
       let goalImg = new Image();
-      goalImg.src = "src/assets/goal.png";
+      goalImg.src = "/assets/goal.png";
       goalImg.onload = () => {
         setGoal(goalImg);
         ctx.drawImage(goalImg, ref.current!.width - goalImg.width, ref.current!.height - goalImg.height);
